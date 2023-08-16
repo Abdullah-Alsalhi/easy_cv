@@ -1,7 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
-
+// components
+import InformationCreate from "@/Components/Information/InformationForm";
 export default function Dashboard({ auth }: PageProps) {
     return (
         <AuthenticatedLayout
@@ -13,7 +14,11 @@ export default function Dashboard({ auth }: PageProps) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 dark:text-gray-100">You're logged in!</div>
+                        <div className="p-6 text-gray-900 dark:text-gray-100 grid grid-cols-12 gap-4">
+                            <div className="sm:col-span-6 col-span-12">
+                                <InformationCreate />
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
