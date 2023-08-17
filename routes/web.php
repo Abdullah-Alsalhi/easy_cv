@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-
+use App\Models\Information;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,8 +27,11 @@ Route::get('/', function () {
     ]);
 });
 
+// Todo: everything here gonna change
+
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    $data = Information::select('first_name', 'middle_name', 'last_name', 'bio', 'country', 'city')->first();
+    return Inertia::render('Dashboard', ['information' => $data]);
 })->/* middleware(['auth', 'verified'])-> */name('dashboard');
 
 Route::middleware('auth')->group(function () {

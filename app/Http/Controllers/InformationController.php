@@ -21,7 +21,7 @@ class InformationController extends Controller
      */
    public function create()
    {
-       return Inertia::render('Dashboard');
+    //    return Inertia::render('Dashboard');
    }
 
     /**
@@ -30,22 +30,21 @@ class InformationController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'first_name' => 'required',
-            'middle_name' => '',
-            'last_name' => 'required',
-            'bio' => 'required',
-            'country' => '',
-            'city' => ''
+            'first_name' => 'required|max:16',
+            'middle_name' => 'max:16',
+            'last_name' => 'required|max:16',
+            'bio' => 'required|max:200',
+            'country' => 'max:30',
+            'city' => 'max:16',
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
 
-        auth()->user()->information()->updateOrCreate(
-            ['user_id' => auth()->user()->id], // Unique identifier
-            $validatedData // Data to be updated or created
-        );
+        $insertedData = auth()->user()->information()->updateOrCreate(['user_id' => auth()->user()->id], $validatedData);
         
-        return redirect()->route('dashboard');
+        return Inertia::render('Information/InformationForm',[
+            'information' => $insertedData
+        ]);
     }
 
     /**

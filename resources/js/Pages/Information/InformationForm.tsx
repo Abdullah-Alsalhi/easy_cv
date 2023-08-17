@@ -1,5 +1,5 @@
 'use client';
-import {useRef, FormEventHandler} from 'react'
+import {useRef, FormEventHandler, useEffect} from 'react'
 import { Button, Card, Label, TextInput, Textarea } from 'flowbite-react';
 
 import InputError from '@/Components/InputError';
@@ -7,7 +7,7 @@ import InputError from '@/Components/InputError';
 import {useForm} from "@inertiajs/react";
 
 
-export default function InformationUpdate() : JSX.Element {
+export default function InformationUpdate(props: any) : JSX.Element {
 
     const firstNameInput = useRef<HTMLInputElement>();
     const middleNameInput = useRef<HTMLInputElement>();
@@ -33,6 +33,7 @@ export default function InformationUpdate() : JSX.Element {
         * or 
         * create the entity
         * when the component mounted i want to show the fields values
+        * solve the data object issue when it's rendred from dashboard
     */
 
     const submit: FormEventHandler = (e) => {
@@ -79,7 +80,16 @@ export default function InformationUpdate() : JSX.Element {
         else { */    
             post(route('information.store'));
         // }
+    };
+
+    useEffect(() => {
+    if (props.information) {
+        setData((prevData) => ({
+            ...prevData,
+            ...props.information
+        }));
     }
+    }, [props.information]);
 
     return (
     <Card>
@@ -199,10 +209,9 @@ export default function InformationUpdate() : JSX.Element {
               />
               <InputError message={errors.city} className="mt-2" />
           </div>
-        <Button type="submit" class="bg-green-300 flex justify-center" disabled={processing}>
+        <Button type="submit" class="bg-green-300 flex justify-center">
           Save
         </Button>
-        
       </form>
     </Card>
   )
