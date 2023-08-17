@@ -44,6 +44,6 @@ Route::middleware('auth')->group(function () {
  *
  *
  */
-Route::resource('information', InformationController::class);
+Route::post('information', [InformationController::class, 'store'])->name('information.store');
 
 require __DIR__.'/auth.php';

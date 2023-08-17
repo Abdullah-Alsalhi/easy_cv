@@ -8,24 +8,9 @@ use Inertia\Inertia;
 use Inertia\Response;
 class InformationController extends Controller
 {
+    
     /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        // return Inertia::render('Dashboard', ['information' => auth()->user()->information()->first()]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-   public function create()
-   {
-    //    return Inertia::render('Dashboard');
-   }
-
-    /**
-     * Store a newly created resource in storage.
+     * Store a newly created or updated resource in storage.
      */
     public function store(Request $request)
     {
@@ -38,44 +23,8 @@ class InformationController extends Controller
             'city' => 'max:16',
         ]);
 
-        $validatedData['user_id'] = auth()->user()->id;
-
-        $insertedData = auth()->user()->information()->updateOrCreate(['user_id' => auth()->user()->id], $validatedData);
+        auth()->user()->information()->updateOrCreate(['user_id' => auth()->user()->id], $validatedData);
         
-        return Inertia::render('Information/InformationForm',[
-            'information' => $insertedData
-        ]);
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Information $informations)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Information $informations)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Information $informations)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Information $informations)
-    {
-        //
+        return redirect()->back();
     }
 }
