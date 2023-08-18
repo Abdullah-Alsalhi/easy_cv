@@ -2,9 +2,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 // components
-import InformationCreate from "@/Pages/Information/InformationForm";
-import ContactUpdate from './Contact/ContactForm';
-export default function Dashboard({ auth, information, contact }: PageProps) {
+import InformationForm from "@/Pages/Forms/InformationForm";
+import ContactForm from '@/Pages/Forms/ContactForm';
+import EducationForm from './Forms/EducationForm';
+export default function Dashboard({ auth, information, contact, education }: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -17,10 +18,13 @@ export default function Dashboard({ auth, information, contact }: PageProps) {
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 text-gray-900 dark:text-gray-100 grid grid-cols-12 gap-4">
                             <div className="sm:col-span-6 col-span-12">
-                                <InformationCreate information={information}/>
+                                <InformationForm information={information}/>
                             </div>
                             <div className="sm:col-span-6 col-span-12">
-                                <ContactUpdate contact={contact} />
+                                <ContactForm contact={contact} />
+                                <div className='mt-2'>
+                                    <EducationForm education={education}/>
+                                </div>
                             </div>
                         </div>
                     </div>

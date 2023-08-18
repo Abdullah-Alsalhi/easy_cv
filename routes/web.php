@@ -5,6 +5,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Models\Information;
+use App\Models\Education;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -24,14 +25,20 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('Welcome');
 
 // Todo: everything here gonna change
 
 Route::get('/dashboard', function () {
     $information = Information::select('first_name', 'middle_name', 'last_name', 'bio', 'country', 'city')->first();
     $contact = Contact::select('email', 'phone')->first();
-    return Inertia::render('Dashboard', ['information' => $information, 'contact' => $contact]);
+    $education = Education::select('institution_name', 'degree', 'field_of_study', 'graduation_year')->first();
+
+    return Inertia::render('Dashboard', [
+        'information' => $information,
+        'contact' => $contact,
+        'education' => $education
+    ]);
 })->/* middleware(['auth', 'verified'])-> */name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -46,4 +53,6 @@ Route::middleware('auth')->group(function () {
  */
 Route::post('information', [InformationController::class, 'store'])->name('information.store');
 Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
+Route::post('education', [EducationController::class, 'store'])->name('education.store');
+
 require __DIR__.'/auth.php';
