@@ -3,7 +3,8 @@ import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 // components
 import InformationCreate from "@/Pages/Information/InformationForm";
-export default function Dashboard({ auth, information }: PageProps) {
+import ContactUpdate from './Contact/ContactForm';
+export default function Dashboard({ auth, information, contact }: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -17,6 +18,9 @@ export default function Dashboard({ auth, information }: PageProps) {
                         <div className="p-6 text-gray-900 dark:text-gray-100 grid grid-cols-12 gap-4">
                             <div className="sm:col-span-6 col-span-12">
                                 <InformationCreate information={information}/>
+                            </div>
+                            <div className="sm:col-span-6 col-span-12">
+                                <ContactUpdate contact={contact} />
                             </div>
                         </div>
                     </div>
