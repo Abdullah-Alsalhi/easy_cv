@@ -25,7 +25,7 @@ Route::get('/', function () {
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
-});
+})->name('Welcome');
 
 // Todo: everything here gonna change
 
@@ -33,6 +33,7 @@ Route::get('/dashboard', function () {
     $information = Information::select('first_name', 'middle_name', 'last_name', 'bio', 'country', 'city')->first();
     $contact = Contact::select('email', 'phone')->first();
     $education = Education::select('institution_name', 'degree', 'field_of_study', 'graduation_year')->first();
+
     return Inertia::render('Dashboard', [
         'information' => $information,
         'contact' => $contact,

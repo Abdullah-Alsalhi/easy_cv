@@ -15,10 +15,10 @@ class ContactController extends Controller
             'email' => 'required|email|max:255',
             'phone' => 'required|numeric|digits_between:10,12',
         ]);
-
+        
         auth()->user()->contact()->updateOrCreate(['user_id' => auth()->user()->id], $validatedData);
         
         // return redirect()->back();
-        return to_route('dashboard');
+        // return to_route('dashboard');
     }
 }

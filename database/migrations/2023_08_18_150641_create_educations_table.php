@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('educations', function (Blueprint $table) {
             $table->id();
+
             $table->string('institution_name');
             $table->string('degree');
             $table->string('field_of_study');
@@ -23,7 +24,7 @@ return new class extends Migration
                 ->references('id')
                 ->on('users')
                 ->onDelete('cascade');
-            
+
             $table->timestamps();
         });
     }

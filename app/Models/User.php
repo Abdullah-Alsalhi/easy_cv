@@ -53,9 +53,9 @@ class User extends Authenticatable
         return $this->hasOne(Contact::class);
     }
 
-    public function educations()
+    public function education()
     {
-        return $this->hasMany(Education::class);
+        return $this->hasOne(Education::class);
     }
 
 }

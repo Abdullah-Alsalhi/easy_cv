@@ -12,11 +12,11 @@ class EducationController extends Controller
            'institution_name' => 'required|max:255',
            'degree' => 'required|max:255',
            'field_of_study' => 'required|max:255',
-           'graduation_year' => 'date_format:Y',
+           'graduation_year' => 'date_format:Y-m-d',
         ]);
 
-        auth()->user()->eductaion()->updateOrCreate(['user_id' => auth()->user()->id], $validatedDate);
+        auth()->user()->education()->updateOrCreate(['user_id' => auth()->user()->id], $validatedDate);
 
-        return to_route('dashboard');
+        return redirect()->back();
     }
 }

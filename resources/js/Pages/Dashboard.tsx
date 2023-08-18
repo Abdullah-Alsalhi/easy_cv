@@ -23,7 +23,7 @@ export default function Dashboard({ auth, information, contact, education }: Pag
                             <div className="sm:col-span-6 col-span-12">
                                 <ContactForm contact={contact} />
                                 <div className='mt-2'>
-                                    <EducationForm eductaion={education}/>
+                                    <EducationForm education={education}/>
                                 </div>
                             </div>
                         </div>

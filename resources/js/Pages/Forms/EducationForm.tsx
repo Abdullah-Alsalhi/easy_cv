@@ -9,13 +9,13 @@ import {useForm} from "@inertiajs/react";
 
 export default function EducationForm(props: any) : JSX.Element {
 
-    const instituation_nameInput = useRef<HTMLInputElement>();
+    const institution_nameInput = useRef<HTMLInputElement>();
     const degreeInput = useRef<HTMLInputElement>();
     const field_of_studyInput = useRef<HTMLInputElement>();
     const graduation_yearInput = useRef<HTMLInputElement>();
 
     const { data, setData, errors, get, put, post, reset, processing, recentlySuccessful } = useForm({
-        instituation_name: '',
+        institution_name: '',
         degree: '',
         field_of_study:'',
         graduation_year: ''
@@ -24,14 +24,14 @@ export default function EducationForm(props: any) : JSX.Element {
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        /* if (data.instituation_name){
+        /* if (data.institution_name){
             
             post(route('education.update', data) , {
                 preserveScroll: true,
                 onSuccess: () => reset(),
                 onError: (errors) => {
-                    if (errors.instituation_name) {
-                        reset('instituation_name');
+                    if (errors.institution_name) {
+                        reset('institution_name');
                         firstNameInput.current?.focus();
                     }
     
@@ -82,22 +82,22 @@ export default function EducationForm(props: any) : JSX.Element {
         <div>
           <div className="mb-2 block">
             <Label
-              htmlFor="instituation_name"
-              value="instituation_name"
+              htmlFor="institution_name"
+              value="institution_name"
             />
               <span className="text-red-800">
                   <strong> **</strong>
               </span>
           </div>
           <TextInput
-            id="instituation_name"
-            name="instituation_name"
-            value={data.instituation_name}
-            onChange={(e) => setData('instituation_name', e.target.value)}
+            id="institution_name"
+            name="institution_name"
+            value={data.institution_name}
+            onChange={(e) => setData('institution_name', e.target.value)}
             required
-            type="instituation_name"
+            type="institution_name"
           />
-          <InputError message={errors.instituation_name} className="mt-2" />
+          <InputError message={errors.institution_name} className="mt-2" />
         </div>
         <div>
           <div className="mb-2 block">
