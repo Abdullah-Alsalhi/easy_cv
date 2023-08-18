@@ -7,7 +7,7 @@ import InputError from '@/Components/InputError';
 import {useForm} from "@inertiajs/react";
 
 
-export default function ContactUpdate(props: any) : JSX.Element {
+export default function ContactForm(props: any) : JSX.Element {
 
     const emailInput = useRef<HTMLInputElement>();
     const phoneInput = useRef<HTMLInputElement>();
@@ -84,9 +84,6 @@ export default function ContactUpdate(props: any) : JSX.Element {
 
     return (
     <Card>
-        <span className="text-red-800 bg-red-50 p-2 rounded">
-            <h1><strong>**</strong> required</h1>
-        </span>
       <form onSubmit={submit} className="flex flex-col gap-4">
         <div>
           <div className="mb-2 block">
@@ -129,7 +126,7 @@ export default function ContactUpdate(props: any) : JSX.Element {
               />
               <InputError message={errors.phone} className="mt-2" />
           </div>
-        <Button type="submit" class="bg-green-300 flex justify-center">
+        <Button type="submit" className="bg-green-300 flex justify-center">
           Save
         </Button>
       </form>

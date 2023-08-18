@@ -18,6 +18,7 @@ class ContactController extends Controller
 
         auth()->user()->contact()->updateOrCreate(['user_id' => auth()->user()->id], $validatedData);
         
-        return redirect()->back();
+        // return redirect()->back();
+        return to_route('dashboard');
     }
 }
