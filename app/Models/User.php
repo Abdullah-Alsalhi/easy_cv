@@ -48,4 +48,9 @@ class User extends Authenticatable
         return $this->hasOne(Information::class);
     }
 
+    public function contact()
+    {
+        return $this->hasOne(Contact::class);
+    }
+
 }

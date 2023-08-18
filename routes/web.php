@@ -1,7 +1,6 @@
 <?php
 namespace App\Http\Controllers;
-//use App\Http\Controllers\InformationController;
-//use App\Http\Controllers\ProfileController;
+use App\Models\Contact;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -30,8 +29,9 @@ Route::get('/', function () {
 // Todo: everything here gonna change
 
 Route::get('/dashboard', function () {
-    $data = Information::select('first_name', 'middle_name', 'last_name', 'bio', 'country', 'city')->first();
-    return Inertia::render('Dashboard', ['information' => $data]);
+    $information = Information::select('first_name', 'middle_name', 'last_name', 'bio', 'country', 'city')->first();
+    $contact = Contact::select('email', 'phone')->first();
+    return Inertia::render('Dashboard', ['information' => $information, 'contact' => $contact]);
 })->/* middleware(['auth', 'verified'])-> */name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -45,5 +45,5 @@ Route::middleware('auth')->group(function () {
  *
  */
 Route::post('information', [InformationController::class, 'store'])->name('information.store');
-
+Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
 require __DIR__.'/auth.php';
