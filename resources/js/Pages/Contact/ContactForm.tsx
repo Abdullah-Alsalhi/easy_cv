@@ -1,6 +1,6 @@
 'use client';
 import {useRef, FormEventHandler, useEffect} from 'react'
-import { Button, Card, Label, TextInput, Tooltip } from 'flowbite-react';
+import { Button, Card, Label, TextInput } from 'flowbite-react';
 
 import InputError from '@/Components/InputError';
 
@@ -127,7 +127,6 @@ export default function ContactUpdate(props: any) : JSX.Element {
                   placeholder='05xxxxxxxx, 9665xxxxxxxx'
                   required
               />
-              <Tooltip className="bg-indigo-500" content='Provide your phone number, including area code or country code' trigger='click'><Button className="bg-indigo-800 mt-2">hint</Button></Tooltip>              
               <InputError message={errors.phone} className="mt-2" />
           </div>
         <Button type="submit" class="bg-green-300 flex justify-center">
