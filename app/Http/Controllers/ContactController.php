@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Inertia\Inertia;
 class ContactController extends Controller
 {
     
@@ -17,7 +17,7 @@ class ContactController extends Controller
         ]);
         
         auth()->user()->contact()->updateOrCreate(['user_id' => auth()->user()->id], $validatedData);
-        
+        return Inertia::location(route('dashboard'));
         // return redirect()->back();
         // return to_route('dashboard');
     }

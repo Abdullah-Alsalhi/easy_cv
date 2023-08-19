@@ -33,12 +33,12 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $information = Information::select('first_name', 'middle_name', 'last_name', 'bio', 'country', 'city')->first();
     $contact = Contact::select('email', 'phone')->first();
-    $education = Education::select('institution_name', 'degree', 'field_of_study', 'graduation_year')->first();
+    $educationList = Education::select('institution_name', 'degree', 'field_of_study', 'graduation_year')->get();
     $mediaList = Media::select('name', 'url')->get();
     return Inertia::render('Dashboard', [
         'information' => $information,
         'contact' => $contact,
-        'education' => $education,
+        'educationList' => $educationList,
         'mediaList' => $mediaList
     ]);
 })->/* middleware(['auth', 'verified'])-> */name('dashboard');

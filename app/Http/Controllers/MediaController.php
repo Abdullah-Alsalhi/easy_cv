@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Media;
+use Inertia\Inertia;
 class MediaController extends Controller
 {
     public function store(Request $request)
@@ -22,7 +23,6 @@ class MediaController extends Controller
                 'url' => $mediaItem['url']
             ]);
         }
-
-        return redirect('/');
+        return Inertia::render('dashboard');
     }
 }

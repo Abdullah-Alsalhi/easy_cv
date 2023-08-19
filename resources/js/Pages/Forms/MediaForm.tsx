@@ -71,7 +71,7 @@ export default function MediaForm(props: any) : JSX.Element {
                 required
                 type="text"
                 />
-                
+                {/*@ts-ignore */}
                 <InputError message={errors[`mediaList.${index}.name`]} className="mt-2" />
                     <div className="mb-2 block">
                     <Label
@@ -90,6 +90,7 @@ export default function MediaForm(props: any) : JSX.Element {
                     required
                     type="text"
                     />
+                    {/*@ts-ignore */}
                     <InputError message={errors['mediaList.'+index+'.url']} className="mt-2" />
                 </div>
         ))}

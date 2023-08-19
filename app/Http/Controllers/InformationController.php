@@ -25,6 +25,6 @@ class InformationController extends Controller
 
         auth()->user()->information()->updateOrCreate(['user_id' => auth()->user()->id], $validatedData);
         
-        return redirect()->back();
+        return Inertia::location(route('dashboard'));
     }
 }

@@ -1,5 +1,5 @@
 'use client';
-import {useRef, FormEventHandler, useEffect} from 'react'
+import {useRef, FormEventHandler, useEffect, useState} from 'react'
 import { Button, Card, Label, TextInput } from 'flowbite-react';
 
 import InputError from '@/Components/InputError';
@@ -13,72 +13,51 @@ export default function EducationForm(props: any) : JSX.Element {
     const degreeInput = useRef<HTMLInputElement>();
     const field_of_studyInput = useRef<HTMLInputElement>();
     const graduation_yearInput = useRef<HTMLInputElement>();
-
+    const [disableAddButton, setDisableAddButton] = useState(false);
     const { data, setData, errors, get, put, post, reset, processing, recentlySuccessful } = useForm({
-        institution_name: '',
-        degree: '',
-        field_of_study:'',
-        graduation_year: ''
+        educationList: [{institution_name:'', degree:'', field_of_study:'', graduation_year:''}]
     });
+
+
+    const handleAddEducation = () => {
+      if(data.educationList.length === 3){
+          setDisableAddButton(true);
+          return;
+      }
+      setData('educationList', [
+          ...data.educationList,
+          {institution_name:'', degree:'', field_of_study:'', graduation_year:''}
+      ]);
+    }
+
+    const handleEducationChange = (index: number, filed: string, value: string) => {
+      const updatedEducationList: any = [...data.educationList];
+      updatedEducationList[index][filed] = value;
+      setData('educationList', updatedEducationList);
+  }
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
-
-        /* if (data.institution_name){
-            
-            post(route('education.update', data) , {
-                preserveScroll: true,
-                onSuccess: () => reset(),
-                onError: (errors) => {
-                    if (errors.institution_name) {
-                        reset('institution_name');
-                        firstNameInput.current?.focus();
-                    }
-    
-                    if (errors.degree) {
-                        reset('degree');
-                        middleNameInput.current?.focus();
-                    }
-    
-                    if (errors.last_name) {
-                        reset('last_name');
-                        lastNameInput.current?.focus();
-                    }
-    
-                    if (errors.bio) {
-                        reset('bio');
-                        bioInput.current?.focus();
-                    }
-    
-                    if (errors.country) {
-                        reset('country');
-                        countryInput.current?.focus();
-                    }
-    
-                    if (errors.city) {
-                        reset('city');
-                        cityInput.current?.focus();
-                    }
-                }
-            })
-        }
-        else { */    
             post(route('education.store'));
-        // }
     };
 
     useEffect(() => {
-    if (props.education) {
+    if (props.educationList) {
         setData((prevData) => ({
             ...prevData,
-            ...props.education
+            educationList:[...props.educationList]
         }));
+        console.log(data.educationList);
     }
-    }, [props.education]);
+    }, [props.educationList]);
 
     return (
     <Card>
+      <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 3 Education</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
+        {data.educationList.map((education, index: number) => (
+        <div className='relative' key={index}>
+          <Button type="button" className={`bg-red-100 text-red-800 rounded absolute top-0 end-0 ${index ? 'block': 'hidden'}`} onClick={()=> setData('educationList', data.educationList.filter((_, i) => i !== index))}>delete</Button>
         <div>
           <div className="mb-2 block">
             <Label
@@ -92,12 +71,13 @@ export default function EducationForm(props: any) : JSX.Element {
           <TextInput
             id="institution_name"
             name="institution_name"
-            value={data.institution_name}
-            onChange={(e) => setData('institution_name', e.target.value)}
+            value={education.institution_name}
+            onChange={(e) => handleEducationChange(index,'institution_name', e.target.value)}
             required
             type="institution_name"
           />
-          <InputError message={errors.institution_name} className="mt-2" />
+          {/*@ts-ignore */}
+          <InputError message={errors[`educationList.${index}.institution_name`]} className="mt-2" />
         </div>
         <div>
           <div className="mb-2 block">
@@ -112,12 +92,13 @@ export default function EducationForm(props: any) : JSX.Element {
           <TextInput
             id="degree"
             name="degree"
-            value={data.degree}
-            onChange={(e) => setData('degree', e.target.value)}
+            value={education.degree}
+            onChange={(e) => handleEducationChange(index,'degree', e.target.value)}
             required
             type="degree"
           />
-          <InputError message={errors.degree} className="mt-2" />
+          {/*@ts-ignore */}
+          <InputError message={errors[`educationList.${index}.degree`]} className="mt-2" />
         </div>
         <div>
           <div className="mb-2 block">
@@ -132,12 +113,13 @@ export default function EducationForm(props: any) : JSX.Element {
           <TextInput
             id="field_of_study"
             name="field_of_study"
-            value={data.field_of_study}
-            onChange={(e) => setData('field_of_study', e.target.value)}
+            value={education.field_of_study}
+            onChange={(e) => handleEducationChange(index,'field_of_study', e.target.value)}
             required
             type="field_of_study"
           />
-          <InputError message={errors.field_of_study} className="mt-2" />
+          {/*@ts-ignore */}
+          <InputError message={errors[`educationList.${index}.field_of_study`]} className="mt-2" />
         </div>
         <div>
           <div className="mb-2 block">
@@ -149,13 +131,16 @@ export default function EducationForm(props: any) : JSX.Element {
           <TextInput
             id="graduation_year"
             name="graduation_year"
-            value={data.graduation_year}
-            onChange={(e) => setData('graduation_year', e.target.value)}
-            required
+            value={education.graduation_year}
+            onChange={(e) => handleEducationChange(index,'graduation_year', e.target.value)}
             type="graduation_year"
           />
-          <InputError message={errors.graduation_year} className="mt-2" />
+          {/*@ts-ignore */}
+          <InputError message={errors[`educationList.${index}.graduation_year`]} className="mt-2" />
         </div>
+        </div>
+        ))}
+        <Button disabled={disableAddButton} type="button" className="bg-green-300 flex justify-center" onClick={handleAddEducation}>Add More</Button>
         <Button type="submit" className="bg-green-300 flex justify-center">
           Save
         </Button>
