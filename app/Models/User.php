@@ -43,19 +43,28 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // User can have only one information
     public function information()
     {
         return $this->hasOne(Information::class);
     }
 
+    // User can have only on contact form
     public function contact()
     {
         return $this->hasOne(Contact::class);
     }
 
+    // User can have one or more educations
     public function education()
     {
-        return $this->hasOne(Education::class);
+        return $this->hasMany(Education::class);
+    }
+    
+    // User can have one or more media
+    public function media()
+    {
+        return $this->hasMany(Media::class);
     }
 
 }
