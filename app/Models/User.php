@@ -67,4 +67,10 @@ class User extends Authenticatable
         return $this->hasMany(Media::class);
     }
 
+    // User can have one or more skills
+    public function skill()
+    {
+        return $this->hasMany(Skill::class);
+    }
+
 }

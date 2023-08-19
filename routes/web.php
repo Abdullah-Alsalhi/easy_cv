@@ -7,6 +7,7 @@ use Inertia\Inertia;
 use App\Models\Information;
 use App\Models\Education;
 use App\Models\Media;
+use App\Models\Skill;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -35,11 +36,14 @@ Route::get('/dashboard', function () {
     $contact = Contact::select('email', 'phone')->first();
     $educationList = Education::select('institution_name', 'degree', 'field_of_study', 'graduation_year')->get();
     $mediaList = Media::select('name', 'url')->get();
+    $skillList = Skill::select('name')->get();
+    
     return Inertia::render('Dashboard', [
         'information' => $information,
         'contact' => $contact,
         'educationList' => $educationList,
-        'mediaList' => $mediaList
+        'mediaList' => $mediaList,
+        'skillList' => $skillList
     ]);
 })->/* middleware(['auth', 'verified'])-> */name('dashboard');
 
@@ -57,4 +61,5 @@ Route::post('information', [InformationController::class, 'store'])->name('infor
 Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
 Route::post('education', [EducationController::class, 'store'])->name('education.store');
 Route::post('media', [MediaController::class, 'store'])->name('media.store');
+Route::post('skill', [SkillController::class, 'store'])->name('skill.store');
 require __DIR__.'/auth.php';
