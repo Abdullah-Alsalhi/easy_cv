@@ -4,8 +4,9 @@ import { PageProps } from '@/types';
 // components
 import InformationForm from "@/Pages/Forms/InformationForm";
 import ContactForm from '@/Pages/Forms/ContactForm';
-import EducationForm from './Forms/EducationForm';
-export default function Dashboard({ auth, information, contact, education }: PageProps) {
+import EducationForm from '@/Pages/Forms/EducationForm';
+import MediaForm from '@/Pages/Forms/MediaForm';
+export default function Dashboard({ auth, information, contact, education, mediaList }: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -25,6 +26,9 @@ export default function Dashboard({ auth, information, contact, education }: Pag
                                 <div className='mt-2'>
                                     <EducationForm education={education}/>
                                 </div>
+                            </div>
+                            <div className="sm:col-span-6 col-span-12">
+                                <MediaForm mediaList={mediaList}/>
                             </div>
                         </div>
                     </div>
