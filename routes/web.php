@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+
 use App\Models\Contact;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -9,7 +10,9 @@ use App\Models\Education;
 use App\Models\Media;
 use App\Models\Skill;
 use App\Models\Project;
+use App\Models\Experience;
 use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -39,16 +42,18 @@ Route::get('/dashboard', function () {
     $mediaList = Media::select('name', 'url')->get();
     $skillList = Skill::select('name')->get();
     $projectList = Project::select('name', 'description')->get();
-    
+    $experienceList = Experience::select('company_name', 'job_title', 'description', 'start_date', 'end_date', 'job_location')->get();
+
     return Inertia::render('Dashboard', [
         'information' => $information,
         'contact' => $contact,
         'educationList' => $educationList,
         'mediaList' => $mediaList,
         'skillList' => $skillList,
-        'projectList' => $projectList
+        'projectList' => $projectList,
+        'experienceList' => $experienceList
     ]);
-})->/* middleware(['auth', 'verified'])-> */name('dashboard');
+})-> /* middleware(['auth', 'verified'])-> */name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -66,4 +71,5 @@ Route::post('education', [EducationController::class, 'store'])->name('education
 Route::post('media', [MediaController::class, 'store'])->name('media.store');
 Route::post('skill', [SkillController::class, 'store'])->name('skill.store');
 Route::post('project', [ProjectController::class, 'store'])->name('project.store');
-require __DIR__.'/auth.php';
+Route::post('experience', [ExperienceController::class, 'store'])->name('experience.store');
+require __DIR__ . '/auth.php';

@@ -8,7 +8,8 @@ import EducationForm from '@/Pages/Forms/EducationForm';
 import MediaForm from '@/Pages/Forms/MediaForm';
 import SkillForm from '@/Pages/Forms/SkillForm';
 import ProjectForm from '@/Pages/Forms/ProjectForm';
-export default function Dashboard({ auth, information, contact, educationList, mediaList, skillList, projectList }: PageProps) {
+import ExperienceForm from '@/Pages/Forms/ExperienceForm';
+export default function Dashboard({ auth, information, contact, educationList, mediaList, skillList, projectList, experienceList }: PageProps) {
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -37,6 +38,9 @@ export default function Dashboard({ auth, information, contact, educationList, m
                             </div>
                             <div className="sm:col-span-6 col-span-12">
                                 <ProjectForm projectList={projectList}/>
+                            </div>
+                            <div className="sm:col-span-6 col-span-12">
+                                <ExperienceForm experienceList={experienceList}/>
                             </div>
                         </div>
                     </div>
