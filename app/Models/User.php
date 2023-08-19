@@ -73,4 +73,10 @@ class User extends Authenticatable
         return $this->hasMany(Skill::class);
     }
 
+    // User can have one or more projects
+    public function project()
+    {
+        return $this->hasMany(Project::class);
+    }
+
 }

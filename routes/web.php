@@ -8,6 +8,7 @@ use App\Models\Information;
 use App\Models\Education;
 use App\Models\Media;
 use App\Models\Skill;
+use App\Models\Project;
 use App\Models\User;
 /*
 |--------------------------------------------------------------------------
@@ -37,13 +38,15 @@ Route::get('/dashboard', function () {
     $educationList = Education::select('institution_name', 'degree', 'field_of_study', 'graduation_year')->get();
     $mediaList = Media::select('name', 'url')->get();
     $skillList = Skill::select('name')->get();
+    $projectList = Project::select('name', 'description')->get();
     
     return Inertia::render('Dashboard', [
         'information' => $information,
         'contact' => $contact,
         'educationList' => $educationList,
         'mediaList' => $mediaList,
-        'skillList' => $skillList
+        'skillList' => $skillList,
+        'projectList' => $projectList
     ]);
 })->/* middleware(['auth', 'verified'])-> */name('dashboard');
 
@@ -62,4 +65,5 @@ Route::post('contact', [ContactController::class, 'store'])->name('contact.store
 Route::post('education', [EducationController::class, 'store'])->name('education.store');
 Route::post('media', [MediaController::class, 'store'])->name('media.store');
 Route::post('skill', [SkillController::class, 'store'])->name('skill.store');
+Route::post('project', [ProjectController::class, 'store'])->name('project.store');
 require __DIR__.'/auth.php';
