@@ -11,7 +11,6 @@ use App\Models\Media;
 use App\Models\Skill;
 use App\Models\Project;
 use App\Models\Experience;
-use App\Models\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,15 +60,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-/*
- *
- *
- */
-Route::post('information', [InformationController::class, 'store'])->name('information.store');
-Route::post('contact', [ContactController::class, 'store'])->name('contact.store');
-Route::post('education', [EducationController::class, 'store'])->name('education.store');
-Route::post('media', [MediaController::class, 'store'])->name('media.store');
-Route::post('skill', [SkillController::class, 'store'])->name('skill.store');
-Route::post('project', [ProjectController::class, 'store'])->name('project.store');
-Route::post('experience', [ExperienceController::class, 'store'])->name('experience.store');
+
+Route::resource('information', InformationController::class)->only(['store']);
+Route::resource('contact', ContactController::class)->only(['store']);
+Route::resource('education', EducationController::class)->only(['store']);
+Route::resource('media', MediaController::class)->only(['store']);
+Route::resource('skill', SkillController::class)->only(['store']);
+Route::resource('project', ProjectController::class)->only(['store']);
+Route::resource('experience', ExperienceController::class)->only(['store']);
 require __DIR__ . '/auth.php';
