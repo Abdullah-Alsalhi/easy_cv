@@ -92,7 +92,7 @@ export default function InformationForm(props: any) : JSX.Element {
     }, [props.information]);
 
     return (
-    <Card>
+    <Card className='mt-2'>
       <form onSubmit={submit} className="flex flex-col gap-4">
         <div>
           <div className="mb-2 block">

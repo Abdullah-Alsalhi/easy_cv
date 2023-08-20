@@ -68,4 +68,8 @@ Route::resource('media', MediaController::class)->only(['store']);
 Route::resource('skill', SkillController::class)->only(['store']);
 Route::resource('project', ProjectController::class)->only(['store']);
 Route::resource('experience', ExperienceController::class)->only(['store']);
+
+
+// pdf route
+Route::get('/generate-pdf', [PdfController::class, 'generatePdf'])->name('generate-pdf');
 require __DIR__ . '/auth.php';
