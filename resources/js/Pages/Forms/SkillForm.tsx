@@ -47,7 +47,7 @@ export default function SkillForm(props: any) : JSX.Element {
     }, [props.skillList]);
 
     return (
-    <Card>
+    <Card className='mt-2'>
         <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 8 skill</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
         {data.skillList.map((skill, index: number) => (

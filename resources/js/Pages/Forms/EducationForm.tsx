@@ -52,7 +52,7 @@ export default function EducationForm(props: any) : JSX.Element {
     }, [props.educationList]);
 
     return (
-    <Card>
+    <Card className='mt-2'>
       <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 3 Education</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
         {data.educationList.map((education, index: number) => (

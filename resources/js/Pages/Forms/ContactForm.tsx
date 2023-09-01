@@ -25,7 +25,7 @@ export default function ContactForm(props: any): JSX.Element {
     }, [props.contact]);
 
     return (
-        <Card>
+        <Card className='mt-2'>
             <form onSubmit={submit} className="flex flex-col gap-4">
                 <div>
                     <Label

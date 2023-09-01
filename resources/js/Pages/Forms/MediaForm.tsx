@@ -48,7 +48,7 @@ export default function MediaForm(props: any) : JSX.Element {
     }, [props.mediaList]);
 
     return (
-    <Card>
+    <Card className='mt-2'>
         <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 3 media</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
         {data.mediaList.map((media, index: number) => (
