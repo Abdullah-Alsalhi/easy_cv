@@ -51,7 +51,7 @@ export default function ProjectForm(props: any) : JSX.Element {
     <Card className='mt-2'>
         <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 5 project</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
-        {data.projectList.map((project, index: number) => (
+        {data.projectList.length > 0 && data.projectList.map((project, index: number) => (
             <div className='relative' key={index}>
                 <Button type="button" className={`bg-red-100 text-red-800 rounded absolute top-0 end-0 ${index ? 'block': 'hidden'}`} onClick={()=> setData('projectList', data.projectList.filter((_, i) => i !== index))}>delete</Button>
                 <div className="mb-2 block">

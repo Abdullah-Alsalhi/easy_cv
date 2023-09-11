@@ -46,18 +46,18 @@ const MyDocument = () => (
 
 export default function Dashboard({
   auth,
-  information,
-  contact,
-  educationList,
-  mediaList,
-  skillList,
-  projectList,
-  experienceList
-}: PageProps) {
+  data
+}: any) {
 
 
-
-  
+  console.log(data.data.information)
+  console.log(data.data.contact)
+  console.log(data.data.educationList)
+  console.log(data.data.mediaList)
+  console.log(data.data.skillList)
+  console.log(data.data.projectList)
+  console.log(data.data.experienceList)
+  console.log(data)
   return (
     <AuthenticatedLayout
       user={auth.user}
@@ -70,20 +70,21 @@ export default function Dashboard({
           <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div className="p-6 text-gray-900 dark:text-gray-100 grid grid-cols-12 gap-4">
               <div className="sm:col-span-6 col-span-12">
-                <InformationForm information={information}/>
-                <ContactForm contact={contact} />
-                <EducationForm educationList={educationList}/>
-                <MediaForm mediaList={mediaList}/>
+                <InformationForm information={data.data.information}/>
+                <ContactForm contact={data.data.contact} />
+                <EducationForm educationList={data.data.educationList}/>
+                <MediaForm mediaList={data.data.mediaList}/>
               </div>
               <div className="sm:col-span-6 col-span-12">
-                <SkillForm skillList={skillList}/>
-                <ProjectForm projectList={projectList}/>
-                <ExperienceForm experienceList={experienceList}/>
+                <SkillForm skillList={data.data.skillList}/>
+                <ProjectForm projectList={data.data.projectList}/>
+                <ExperienceForm experienceList={data.data.experienceList}/>
               </div>
               <Button className='bg-red-700 text-white col-span-12'>
-                <PDFDownloadLink document={<PDFcv information={information} contact={contact} educationList={educationList} mediaList={mediaList} skillList={skillList} projectList={projectList} experienceList={experienceList}/>} fileName={`cv-${auth.user.name}-${new Date().getFullYear()}.pdf`}>
+                {/* todo: this need refactoring */}
+                {/* <PDFDownloadLink document={<PDFcv information={data.data.information} contact={data.data.contact} educationList={data.data.educationList} mediaList={data.data.mediaList} skillList={data.data.skillList} projectList={data.data.projectList} experienceList={data.data.experienceList}/>} fileName={`cv-${auth.user.name}-${new Date().getFullYear()}.pdf`}>
                   {({ blob, url, loading, error }) => loading ? 'Loading document...' : 'Download now!'}
-                </PDFDownloadLink>
+                </PDFDownloadLink> */}
               </Button>
             </div>
           </div>

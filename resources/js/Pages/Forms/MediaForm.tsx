@@ -51,7 +51,7 @@ export default function MediaForm(props: any) : JSX.Element {
     <Card className='mt-2'>
         <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 3 media</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
-        {data.mediaList.map((media, index: number) => (
+        {data.mediaList.length > 0 && data.mediaList.map((media, index: number) => (
             <div className='relative' key={index}>
                 <Button type="button" className={`bg-red-100 text-red-800 rounded absolute top-0 end-0 ${index ? 'block': 'hidden'}`} onClick={()=> setData('mediaList', data.mediaList.filter((_, i) => i !== index))}>delete</Button>
                 <div className="mb-2 block">

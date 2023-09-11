@@ -11,6 +11,7 @@ use App\Models\Media;
 use App\Models\Skill;
 use App\Models\Project;
 use App\Models\Experience;
+use App\Http\Resources\UserData;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,24 +36,28 @@ Route::get('/', function () {
 // Todo: everything here gonna change
 
 Route::get('/dashboard', function () {
-    $information = Information::select('first_name', 'middle_name', 'last_name', 'bio', 'country', 'city')->first();
-    $contact = Contact::select('email', 'phone')->first();
-    $educationList = Education::select('institution_name', 'degree', 'field_of_study', 'graduation_year')->get();
-    $mediaList = Media::select('name', 'url')->get();
-    $skillList = Skill::select('name')->get();
-    $projectList = Project::select('name', 'description')->get();
-    $experienceList = Experience::select('company_name', 'job_title', 'description', 'start_date', 'end_date', 'job_location')->get();
+    // $information = Information::select('first_name', 'middle_name', 'last_name', 'bio', 'country', 'city')->first();
+    // $contact = Contact::select('email', 'phone')->first();
+    // $educationList = Education::select('institution_name', 'degree', 'field_of_study', 'graduation_year')->get();
+    // $mediaList = Media::select('name', 'url')->get();
+    // $skillList = Skill::select('name')->get();
+    // $projectList = Project::select('name', 'description')->get();
+    // $experienceList = Experience::select('company_name', 'job_title', 'description', 'start_date', 'end_date', 'job_location')->get();
 
-    return Inertia::render('Dashboard', [
-        'information' => $information,
-        'contact' => $contact,
-        'educationList' => $educationList,
-        'mediaList' => $mediaList,
-        'skillList' => $skillList,
-        'projectList' => $projectList,
-        'experienceList' => $experienceList
-    ]);
-})-> /* middleware(['auth', 'verified'])-> */name('dashboard');
+    return Inertia::render('Dashboard', ['data' => new UserData(auth()->user())]);
+})->name('dashboard');
+
+
+//     return Inertia::render('Dashboard', [
+//         'information' => $information,
+//         'contact' => $contact,
+//         'educationList' => $educationList,
+//         'mediaList' => $mediaList,
+//         'skillList' => $skillList,
+//         'projectList' => $projectList,
+//         'experienceList' => $experienceList
+//     ]);
+// })-> /* middleware(['auth', 'verified'])-> */name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -84,10 +84,7 @@ export default function InformationForm(props: any) : JSX.Element {
 
     useEffect(() => {
     if (props.information) {
-        setData((prevData) => ({
-            ...prevData,
-            ...props.information
-        }));
+        setData(props.information);
     }
     }, [props.information]);
 

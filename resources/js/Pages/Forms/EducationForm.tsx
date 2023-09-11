@@ -47,7 +47,6 @@ export default function EducationForm(props: any) : JSX.Element {
             ...prevData,
             educationList:[...props.educationList]
         }));
-        console.log(data.educationList);
     }
     }, [props.educationList]);
 
@@ -55,7 +54,7 @@ export default function EducationForm(props: any) : JSX.Element {
     <Card className='mt-2'>
       <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 3 Education</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
-        {data.educationList.map((education, index: number) => (
+        {data.educationList.length > 0 && data.educationList.map((education, index: number) => (
         <div className='relative' key={index}>
           <Button type="button" className={`bg-red-100 text-red-800 rounded absolute top-0 end-0 ${index ? 'block': 'hidden'}`} onClick={()=> setData('educationList', data.educationList.filter((_, i) => i !== index))}>delete</Button>
         <div>

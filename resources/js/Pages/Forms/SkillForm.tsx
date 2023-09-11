@@ -50,7 +50,7 @@ export default function SkillForm(props: any) : JSX.Element {
     <Card className='mt-2'>
         <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 8 skill</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
-        {data.skillList.map((skill, index: number) => (
+        {data.skillList.length > 0 && data.skillList.map((skill, index: number) => (
             <div className='relative' key={index}>
                 <Button type="button" className={`bg-red-100 text-red-800 rounded absolute top-0 end-0 ${index ? 'block': 'hidden'}`} onClick={()=> setData('skillList', data.skillList.filter((_, i) => i !== index))}>delete</Button>
                 <div className="mb-2 block">

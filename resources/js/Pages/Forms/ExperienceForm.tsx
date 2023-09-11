@@ -39,19 +39,20 @@ export default function ExperienceForm(props: any) : JSX.Element {
     };
 
     useEffect(() => {
-    if (props.experienceList) {
-        setData((prevData) => ({
-            ...prevData,
-            experienceList:[...props.experienceList]
-        }));
-    }
+        if (props.experienceList) {
+            setData((prevData) => ({
+                ...prevData,
+                experienceList:[...props.experienceList]
+            }));
+        }
     }, [props.experienceList]);
+
 
     return (
     <Card className='mt-2'>
         <strong className='bg-red-100 text-red-800 p-2 rounded text-center'>You can add up to 5 experience</strong>
       <form onSubmit={submit} className="flex flex-col gap-4">
-        {data.experienceList.map((experience, index: number) => (
+        {data.experienceList.length > 0 && data.experienceList.map((experience, index: number) => (
             <div className='relative' key={index}>
                 <Button type="button" className={`bg-red-100 text-red-800 rounded absolute top-0 end-0 ${index ? 'block': 'hidden'}`} onClick={()=> setData('experienceList', data.experienceList.filter((_, i) => i !== index))}>delete</Button>
                 <div className="mb-2 block">
@@ -66,7 +67,7 @@ export default function ExperienceForm(props: any) : JSX.Element {
                 <TextInput
                     id="company_name"
                     name="company_name"
-                    value={experience.company_name}
+                    value={experience.company_name??''}
                     onChange={(e) => handleExperienceChange(index,'company_name', e.target.value)}
                     required
                     type="text"
@@ -85,7 +86,7 @@ export default function ExperienceForm(props: any) : JSX.Element {
                 <TextInput
                     id="job_title"
                     name="job_title"
-                    value={experience.job_title}
+                    value={experience.job_title??''}
                     onChange={(e) => handleExperienceChange(index,'job_title', e.target.value)}
                     required
                 />
@@ -103,7 +104,7 @@ export default function ExperienceForm(props: any) : JSX.Element {
                 <Textarea
                     id="description"
                     name="description"
-                    value={experience.description}
+                    value={experience.description??''}
                     onChange={(e) => handleExperienceChange(index,'description', e.target.value)}
                     required
                 />
@@ -118,7 +119,7 @@ export default function ExperienceForm(props: any) : JSX.Element {
                 <TextInput
                     id="start_date"
                     name="start_date"
-                    value={experience.start_date}
+                    value={experience.start_date??''}
                     onChange={(e) => handleExperienceChange(index,'start_date', e.target.value)}
                     required
                 />
@@ -133,7 +134,7 @@ export default function ExperienceForm(props: any) : JSX.Element {
                 <TextInput
                     id="end_date"
                     name="end_date"
-                    value={experience.end_date}
+                    value={experience.end_date??''}
                     onChange={(e) => handleExperienceChange(index,'end_date', e.target.value)}
                     required
                 />
@@ -148,7 +149,7 @@ export default function ExperienceForm(props: any) : JSX.Element {
                 <TextInput
                     id="job_location"
                     name="job_location"
-                    value={experience.job_location}
+                    value={experience.job_location??''}
                     onChange={(e) => handleExperienceChange(index,'job_location', e.target.value)}
                     required
                 />
